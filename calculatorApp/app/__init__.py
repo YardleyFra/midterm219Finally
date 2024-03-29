@@ -1,63 +1,50 @@
-import logging
-import csv
-import os
-from .calculator import add, subtract, multiply, divide
+# Assuming your directory structure remains as previously discussed.
+from .logger_singleton import LoggerSingleton
+from .command_factory import CommandFactory
+from .history_manager import HistoryManager, HistoryManager
 from plugins.goodbye_plugin import execute as goodbye_execute
 from plugins.hello_plugin import execute as hello_execute 
+import os
 
-class CSVLogHandler(logging.StreamHandler):
-    def __init__(self, filename):
-        super().__init__()
-        self.filename = filename
-
-    def emit(self, record):
-        username = getattr(record, 'username', 'Unknown') 
-        message = self.format(record)
-        with open(self.filename, 'a', newline='') as f:
-            csv_writer = csv.writer(f)
-            csv_writer.writerow([username, message])
-
-log_path = os.path.join(os.path.dirname(__file__), '..', 'info', 'logs.csv')
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s, %(levelname)s, %(message)s',
-                    handlers=[CSVLogHandler(log_path)])
+# Initialize logging through the Singleton pattern
+LoggerSingleton.getInstance()
 
 class App:
+    def __init__(self):
+        # Correctly initialize HistoryManager with the path to history.csv
+        self.history_facade = HistoryManager(os.path.join(os.path.dirname(__file__), '..', 'info', 'history.csv'))
+        # The rest of your initialization code...
+
     def start(self):
         user_name = input("Please enter your name: ")
-        
-        logging.info(f"{user_name} started the Calculator App")
-        
+        # Utilizing the hello plugin
         hello_execute(user_name)
-        print("Available operations: add, subtract, multiply, divide, exit")
+        print("Available operations: add, subtract, multiply, divide, exit, clear history, display history")
         
         while True:
             operation = input("\nPlease enter an operation or 'exit' to quit: ").strip().lower()
 
             if operation == 'exit':
-                logging.info(f"{user_name} exited the application.")
                 goodbye_execute(user_name)  # Execute goodbye plugin directly here
                 break
-
-            if operation not in ['add', 'subtract', 'multiply', 'divide']:
-                print("Invalid operation. Please choose a valid operation.")
+            elif operation == 'clear history':
+                self.history_facade.clear_history()
+                print("History cleared.")
+                continue
+            elif operation == 'display history':
+                self.history_facade.display_history()
                 continue
 
+            # Create and execute command
             try:
                 num1 = float(input("Enter the first number: "))
                 num2 = float(input("Enter the second number: "))
-                extra = {'username': user_name}
-                logging.info(f"Operation {operation} with numbers {num1} and {num2}", extra=extra)
-            except ValueError:
-                print("Invalid input. Please enter numeric values.")
-                continue
-
-            try:
-                result = {'add': add, 'subtract': subtract, 'multiply': multiply, 'divide': divide}[operation](num1, num2)
+                command = CommandFactory.get_command(operation)
+                result = command.execute(num1, num2)
                 print(f"The result is {result}")
-                logging.info(f"Result of {operation}: {result}", extra=extra)
+                # Adding record to history
+                self.history_facade.add_record(user_name, f"{num1} {operation} {num2}", result)
             except ValueError as e:
-                print(e)
-                continue
-            except KeyError:
-                print("An unexpected error occurred.")
+                print(f"An error occurred: {e}")
+            except Exception as e:
+                print(f"An unexpected error occurred: {e}")
