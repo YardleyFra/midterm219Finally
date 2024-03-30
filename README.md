@@ -45,12 +45,12 @@ Create the following directory structure for your project:
    Navigate to your project directory (`CalculatorApp`) and create a virtual environment:
 
    ```bash
-   python -m venv venv
+   python -m venv myworld
    ```
 
    Activate the virtual environment:
 
-   - On Unix or MacOS: `source venv/bin/activate`
+   - On Unix or MacOS: `source myworld/bin/activate`
 
 4. **Install Dependencies**
 
