@@ -93,6 +93,7 @@ Implement `hello_plugin.py` and `goodbye_plugin.py` in the `plugins` directory, 
 
 Set up `main.py` as the entry point of your application, creating an instance of the `App` class and calling its `start` method.
 
+
 ## Running the Application
 
 With all components implemented, run your application:
@@ -100,5 +101,10 @@ With all components implemented, run your application:
 ```bash
 python main.py
 ```
+## Video submittion 
+
+
+https://github.com/YardleyFra/midterm219Finally/assets/144744560/d5225ac0-7096-4920-9b97-0235782a636d
+
 
 Follow the on-screen prompts to perform calculations, manage history, or exit the application.
