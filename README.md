@@ -104,11 +104,7 @@ python main.py
 ## Video submittion 
 
 
-https://github.com/YardleyFra/midterm219Finally/assets/144744560/5d9ac318-0ddb-4b81-9019-98328f44e287
+https://github.com/YardleyFra/midterm219Finally/assets/144744560/20b2a6b6-ebee-4495-9443-808e97120035
 
 
 
-https://github.com/YardleyFra/midterm219Finally/assets/144744560/d5225ac0-7096-4920-9b97-0235782a636d
-
-
-Follow the on-screen prompts to perform calculations, manage history, or exit the application.
