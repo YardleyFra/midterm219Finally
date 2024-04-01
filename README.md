@@ -104,7 +104,7 @@ python main.py
 ## Video submittion 
 
 
-https://github.com/YardleyFra/midterm219Finally/assets/144744560/20b2a6b6-ebee-4495-9443-808e97120035
+https://www.canva.com/design/DAGBLOzMaT0/Z1e5-shWW6SwHiRjQ26j1Q/edit?utm_content=DAGBLOzMaT0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 
 
