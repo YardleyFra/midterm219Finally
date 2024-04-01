@@ -1,4 +1,5 @@
 # tests/test_command_factory.py
+import pytest
 from app.command_factory import CommandFactory
 from app.commands import AddCommand, SubtractCommand
 

@@ -1,4 +1,5 @@
 # tests/test_commands.py
+import pytest
 from app.commands import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand
 
 def test_add_command():
